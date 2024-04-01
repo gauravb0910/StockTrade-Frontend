@@ -1,0 +1,20 @@
+<div class="input-group-container">
+  <div class="input-group justify-content-center">
+    <input type="text" class="form-control shadow-none" placeholder="Enter Stock Ticker Symbol" aria-label="Stock Ticker Input" matInput [matAutocomplete]="auto" [formControl]="searchControl">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="loadStockData($event.option.value)">
+      <mat-option *ngFor="let option of options" [value]="option.displaySymbol">
+        {{ option.displaySymbol + " | " + option.description }}
+      </mat-option>
+      <mat-option *ngIf="loading">
+        <mat-spinner diameter="20" color="primary"></mat-spinner>
+      </mat-option>
+    </mat-autocomplete>
+    <button class="btn shadow-none" type="button" (click)="loadStockData(this.searchControl.value)">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+    <button class="btn shadow-none" type="button" (click)="clear()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+</div>
+<div id="notification-alert"></div>

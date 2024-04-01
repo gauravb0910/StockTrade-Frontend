@@ -1,0 +1,27 @@
+#main-summary-container {
+  background-color: white;
+}
+
+.stock-price-summary {
+  margin: 28px 0;
+  text-align: center;
+}
+
+.stock-price-summary > p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.company-data {
+  text-align: center;
+}
+
+#about-company-title {
+  font-size: 18px;
+  margin-bottom: 22px;
+}
+
+.company-data > p {
+  margin: 4px;
+  font-size: 12px;
+}

@@ -1,0 +1,11 @@
+.wrapper {
+  padding-bottom: 35px;
+}
+
+app-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+}

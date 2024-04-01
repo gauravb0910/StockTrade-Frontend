@@ -1,0 +1,35 @@
+#main-new-container {
+  background-color: white;
+}
+
+.text-truncate-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  height: 3em;
+  line-height: 1.5em;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.img-fluid {
+  object-fit: cover;
+  width: 100%;
+  height: 76px;
+  padding: 4px;
+  border-radius: 8px
+}
+
+#news-image {
+  text-align: center;
+}
+
+.card {
+  background-color: #f9f9f9;
+}

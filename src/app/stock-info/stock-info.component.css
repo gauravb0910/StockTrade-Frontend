@@ -1,0 +1,146 @@
+.row {
+  align-items: center;
+  text-align: center;
+}
+
+.status-spinner {
+  margin: 120px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin-top: 18px;
+}
+
+.added-to-watchlist-notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: #d7ebe1;
+  padding: 12px 0;
+  margin: 10px 0;
+}
+
+.added-to-watchlist-notification p {
+  margin: 0;
+}
+
+#clear-watchlist-notif {
+  justify-self: end;
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+#stock-company-details {
+  border: none;
+}
+
+.btn {
+  border: none;
+  margin: 6px;
+}
+
+.stock-title {
+  font-size: 32px;
+  color: #373a42;
+}
+
+.stock-name {
+  font-size: 22px;
+  color: #5d565f;
+}
+
+.stock-exchange {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.material-symbols-rounded {
+  font-size: 30px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 300,
+  'GRAD' -25,
+  'opsz' 48
+}
+
+#filled-star {
+  color: #ffdd00;
+  font-size: 30px;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 300,
+  'GRAD' -25,
+  'opsz' 48
+}
+
+#buy-button {
+  background-color: #1a9260;
+}
+
+#sell-button {
+  background-color: #e03c50;
+}
+
+.company-logo {
+  height: 92px;
+  margin-top: 8px;
+  margin-bottom: 50px;
+}
+
+#stock-price-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.current-stock-price {
+  font-size: 36px;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+.stock-change-data {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+.stock-change-date{
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.material-icons {
+  font-size: 50px;
+}
+
+#market-status {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+.mat-tab-group {
+  margin-top: 18px;
+  margin-bottom: 48px;
+}
+
+#stock-info-component {
+  margin-bottom: 16px;
+}

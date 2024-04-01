@@ -1,0 +1,22 @@
+<div class="container my-3" id="main-new-container">
+  <div class="row">
+    <div class="col-md-6" *ngFor="let news_item of top_news_data">
+      <div class="card mb-3">
+        <button type="button" class="btn" (click)="openModal(news_item)">
+          <div class="row g-0" id="news-image">
+            <div class="col-md-3">
+              <div>
+                <img [src]="news_item.image" class="img-fluid" alt="...">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <p class="card-text text-truncate-2">{{ news_item.headline }}</p>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

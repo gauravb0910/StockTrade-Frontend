@@ -1,0 +1,59 @@
+<div class="card">
+  <a href="/search/{{stock_ticker}}" style="text-decoration: none;">
+    <div class="card-header">
+      <span class="stock-display-symbol">{{stock_ticker}}</span>&nbsp;<span class="stock-company-name">{{stock_company}}</span>
+    </div>
+  </a>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>Quantity:</td>
+              <td>{{ quantity | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Avg. Cost/Share:</td>
+              <td>{{ average_cost_per_share | number:'1.2-2' }}</td>
+            </tr>
+            <tr >
+              <td>Total Cost:</td>
+              <td>{{ total_cost | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>Change:</td>
+              <td [style.color]="isChangeZero? 'black' : (isChangePositive? '#058b03' : '#fd0214')">
+                <svg *ngIf="isChangePositive && !isChangeZero" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill mx-0 my-0 px-0 py--1" viewBox="0 0 16 16" style="font-size: 40px; vertical-align: middle;">
+                  <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                </svg>
+                <svg *ngIf="!isChangePositive && !isChangeZero" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill mx-0 my-0 px-0 py--1" viewBox="0 0 16 16" style="font-size: 40px; vertical-align: middle;">
+                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                {{ average_cost_per_share - current_price | number:'1.2-2' }}
+              </td>
+            </tr>
+            <tr>
+              <td>Current Price:</td>
+              <td [style.color]="isChangeZero? 'black' : (isChangePositive? '#058b03' : '#fd0214')">{{ current_price | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Market Value:</td>
+              <td [style.color]="isChangeZero? 'black' : (isChangePositive? '#058b03' : '#fd0214')">{{ current_price * quantity | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <a class="btn btn-primary" id="buy-button" (click)="openModal('buy')">Buy</a>
+    <a class="btn btn-danger" id="sell-button" (click)="openModal('sell')">Sell</a>
+  </div>
+</div>

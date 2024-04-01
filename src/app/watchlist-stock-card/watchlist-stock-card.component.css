@@ -1,0 +1,11 @@
+.card {
+  margin-bottom: 12px;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.card-body {
+  padding-bottom: 2px;
+}

@@ -1,0 +1,43 @@
+<div class="row justify-content-md-center" id="main-summary-container">
+  <div class="col col-lg-6 col-sm-12">
+    <div class="row">
+      <div class="col col-lg-6 col-sm-12">
+        <div class="stock-price-summary">
+          <p><b>High Price:</b>&#32;{{price_details.h}}</p>
+          <p><b>Low Price:</b>&#32;{{price_details.l}}</p>
+          <p><b>Open Price:</b>&#32;{{price_details.o}}</p>
+          <p><b>Prev. Close:</b>&#32;{{price_details.pc}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col col-12">
+        <div class="company-data">
+          <p id="about-company-title"><u>About the company</u></p>
+          <p><b>IPO Start Date:</b>&#32;{{company_details.ipo | date: 'yyyy-MM-dd'}}</p>
+          <p><b>Industry:</b>&#32;{{company_details.finnhubIndustry}}</p>
+          <p><b>Webpage:&#32;</b><a href={{company_details.weburl}} target="_blank">{{company_details.weburl}}</a></p>
+          <p>
+            <b>Company Peers:</b>
+          </p>
+          <p>
+            <a *ngFor="let peer of peers" href="/search/{{peer}}">
+              {{ peer }}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col col-lg-6 col-sm-12">
+    <highcharts-chart
+    [Highcharts]="Highcharts"
+    [constructorType]="chartConstructor"
+    [options]="chartOptions"
+    [(update)]="updateFlag"
+    [oneToOne]="oneToOneFlag"
+    [runOutsideAngular]="runOutsideAngular"
+    style="width: 100%; height: 400px; display: block;">
+  </highcharts-chart>
+  </div>
+</div>

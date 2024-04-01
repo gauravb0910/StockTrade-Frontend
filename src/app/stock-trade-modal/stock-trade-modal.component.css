@@ -1,0 +1,20 @@
+.input-group {
+  margin-top: 8px;
+}
+
+.input-group-text {
+  background-color: white;
+  font-size: 14px;
+  border: none;
+  padding-left: 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#not-enough-money-alert {
+  color: red;
+  padding-top: 12px;
+}

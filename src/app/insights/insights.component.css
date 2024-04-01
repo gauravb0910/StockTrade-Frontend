@@ -1,0 +1,17 @@
+.insights-container {
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 12px 0;
+  background-color: white;
+}
+
+.insider-sentiments-title {
+  font-size: 24px;
+  margin: 12px 0;
+}
+
+@media (min-width: 992px) {
+  .table-width {
+    width: 50%;
+  }
+}

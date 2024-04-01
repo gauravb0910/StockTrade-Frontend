@@ -1,0 +1,21 @@
+<nav class="navbar fixed-top navbar-expand-md navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/search/home">Stock Search</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link px-3" [routerLink]="ticker !== undefined ? '/search/'+ticker : '/search'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" ariaCurrentWhenActive="page">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/watchlist" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page">Watchlist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/portfolio" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page">Portfolio</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

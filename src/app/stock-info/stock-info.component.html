@@ -1,0 +1,126 @@
+<app-home></app-home>
+<div *ngIf="loading" class="status-spinner">
+  <mat-spinner diameter="50" color="primary"></mat-spinner>
+</div>
+<div class="row justify-content-md-center" id="stock-info-component">
+  <div class="col col-lg-10 col-md-11 col-sm-12">
+    <div *ngIf="!loading && shouldDisplayInfo" class="container">
+      <div id="notification-alert"></div>
+      <div class="row justify-content-md-center">
+        <div class="col col-4">
+          <div class="card" id="stock-company-details">
+            <div class="card-body">
+              <div class="row justify-content-md-center">
+                <div class="col col-8">
+                  <div class="stock-title">
+                    {{company_info.ticker}}
+                  </div>
+                </div>
+                <div class="col col-4">
+                  <a *ngIf="!isInWatchList" class="btn px-0 py-0 mx-0 my-0" (click)="addToOrRemoveFromWatchlist()">
+                    <span class="material-symbols-rounded">star</span>
+                  </a>
+                  <a *ngIf="isInWatchList" class="btn px-0 py-0 mx-0 my-0" (click)="addToOrRemoveFromWatchlist()">
+                    <span class="material-symbols-rounded" id="filled-star">star</span>
+                  </a>
+                </div>
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="col col-12">
+                  <p class="stock-name">{{company_info.name}}</p>
+                </div>
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="col col-12">
+                  <p class="stock-exchange">{{company_info.exchange}}</p>
+                </div>
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="col col-12">
+                  <div *ngIf="!loading && shouldDisplayInfo">
+                    <a class="btn btn-primary" id="buy-button" (click)="openModal('buy')">Buy</a>
+                    <a class="btn btn-primary" id="sell-button" *ngIf="enableSellButton" (click)="openModal('sell')">Sell</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-4">
+          <img src={{company_info.logo}} class="company-logo">
+        </div>
+        <div class="col col-4" id="stock-price-details">
+          <div class="row justify-content-md-center">
+            <div class="col col-12">
+              <div class="current-stock-price" [style.color]="isChangeZero? 'black' : (isChangePositive? '#058b03' : '#fd0214')">
+                {{latest_price.c | number:'1.2-2'}}
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col col-12">
+              <div class="stock-change-data" [style.color]="isChangeZero? 'black' : (isChangePositive? '#058b03' : '#fd0214')">
+                <svg *ngIf="isChangePositive && !isChangeZero" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill mx-0 my-0 px-0 py--1" viewBox="0 0 16 16" style="font-size: 40px; vertical-align: middle;">
+                  <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                </svg>
+                <svg *ngIf="!isChangePositive && !isChangeZero" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill mx-0 my-0 px-0 py--1" viewBox="0 0 16 16" style="font-size: 40px; vertical-align: middle;">
+                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                {{this.latest_price.d | number:'1.2-2' }}&#32;&#40;{{this.latest_price.dp | number:'1.2-2'}}&#37;&#41;
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col col-12">
+              <div class="stock-change-date">
+                {{latest_price.t*1000 | date:'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" id="market-status" *ngIf="isMarketOpen" [style.color]="'#058b03'">
+          Market is Open
+        </div>
+        <div class="col" id="market-status" *ngIf="!isMarketOpen" [style.color]="'#fd0214'">
+          Market Closed on {{latest_price.t*1000 | date: 'yyyy-MM-dd HH:mm:ss'}}
+        </div>
+      </div>
+      <div class="row">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Summary">
+            <app-summary
+              [price_details]="latest_price"
+              [company_details]="company_info"
+              [peers]="peers_list"
+              [stock_ticker]="stock_ticker"
+              [graph_data]="hourly_price_data"
+              [isChangeZero]="isChangeZero"
+              [isChangePositive]="isChangePositive">
+            </app-summary>
+          </mat-tab>
+          <mat-tab label="Top News">
+            <app-top-news
+              [top_news_data]="company_top_news">
+            </app-top-news>
+          </mat-tab>
+          <mat-tab label="Charts">
+            <app-charts
+              [stock_ticker]="company_info.ticker"
+              [chart_data]="historical_data_for_charts">
+            </app-charts>
+          </mat-tab>
+          <mat-tab label="Insights">
+            <app-insights
+            [stock_company_name]="company_info.name"
+            [recommendation_trends]="stock_recommendation_trends"
+            [company_earnings]="company_earnings_data"
+            [insider_sentiment_data]="insider_sentiment">
+          </app-insights>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>

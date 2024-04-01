@@ -1,0 +1,10 @@
+.page-title {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.stock-search-bar-container {
+  margin-top: 40px;
+}

@@ -1,0 +1,29 @@
+.container-fluid {
+  background-color: #2728b3;
+  padding: 6px 36px;
+}
+
+nav {
+  padding: 0;
+  z-index: 100;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: rgb(166, 166, 166);
+  border-radius: 13px;
+  margin: 0;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.active {
+  border: 1px solid white;
+  color: rgb(166, 166, 166);
+}
+
+.active:hover {
+  color: white;
+}

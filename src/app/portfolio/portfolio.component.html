@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-8 col-lg-9 col-md-10 col-s-10 col-xs-11 mx-auto">
+      <div id="portfolio-notification-alert"></div>
+      <p class="portfolio-title">My Portfolio</p>
+      <div *ngIf="loading" class="portfolio-status-spinner">
+        <mat-spinner diameter="50" color="primary"></mat-spinner>
+      </div>
+      <div *ngIf="!loading">
+        <p class="wallet-balance">Money in Wallet: ${{ wallet_account.amount | number : "1.2-2" }}</p>
+        <div *ngIf="stocks_list.length===0" class="alert alert-warning" role="alert" id="portfolio-no-data-alert">
+          Currently you don&#39;t have any stock&#46;
+        </div>
+        <app-portfolio-stock-card *ngFor="let stock of stocks_list"
+          [stock_ticker]="stock.stock_ticker"
+          [stock_company]="stock.stock_company"
+          [quantity]="stock.quantity"
+          [total_cost]="stock.total_cost"
+          [wallet_balance]="wallet_account.amount"
+          [portfolio_element_object]="stock"
+          (refreshPage)="refreshPortFolio()">
+        </app-portfolio-stock-card>
+      </div>
+    </div>
+  </div>
+</div>

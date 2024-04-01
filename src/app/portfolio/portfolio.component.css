@@ -1,0 +1,27 @@
+.container-fluid{
+  margin-top: 81px;
+}
+
+.portfolio-title {
+  font-size: 36px;
+}
+
+.wallet-balance {
+  margin: 32px 0 12px 0;
+  font-size: 22px;
+}
+
+#portfolio-no-data-alert {
+  text-align: center;
+}
+
+#portfolio-notification-alert {
+  width: 100%;
+  text-align: center;
+}
+
+.portfolio-status-spinner {
+  margin: 60px 0;
+  display: flex;
+  justify-content: center;
+}

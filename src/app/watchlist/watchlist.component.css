@@ -1,0 +1,17 @@
+.container-fluid{
+  margin-top: 96px;
+}
+
+.watchlist-title {
+  font-size: 36px;
+  margin: 0 0 64px 0;
+}
+
+#watchlist-no-data-alert {
+  text-align: center;
+}
+
+.watchlist-status-spinner {
+  display: flex;
+  justify-content: center;
+}
