@@ -14,7 +14,7 @@
       <span>
         <div class="input-group">
           <span class="input-group-text">Quantity:</span>
-          <input type="number" class="form-control" min="0" [ngModel]="0" #stockQuantity="ngModel" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateQuantity($event)">
+          <input type="text" class="form-control" [ngModel]="0" #stockQuantity="ngModel" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateQuantity($event)">
         </div>
       </span>
       <span>
@@ -24,7 +24,7 @@
   </div>
   <div class="modal-footer">
     <div>
-      Total: {{ (stockQuantity.value || 0) * current_price | number:'1.2-2'}}
+      Total: {{ ((stockQuantity.value >= 0 ? stockQuantity.value : 0) || 0) * current_price | number:'1.2-2'}}
     </div>
     <div>
       <button *ngIf="buy_option_selected" class="btn btn-success" id="buy-sell-button" (click)="buy()" [disabled]="isBuyDisabled()">Buy</button>

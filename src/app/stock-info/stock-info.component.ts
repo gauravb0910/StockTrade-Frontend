@@ -138,26 +138,26 @@ export class StockInfoComponent implements OnInit{
       next: (data: any) => {
         try{
           const curr_time = Date.now();
-          this.company_info = ('Error' in data.company_info || data.company_info===null || data.company_info===undefined) ? new Error(data.company_info) : data.company_info;
-          this.latest_price = ('Error' in data.latest_price || data.latest_price===null || data.latest_price===undefined) ? new Error(data.latest_price) : data.latest_price;
+          if ('Error' in data.company_info || data.company_info===null || data.company_info===undefined) { throw new Error(data.company_info); } else { this.company_info = data.company_info; }
+          if ('Error' in data.latest_price || data.latest_price===null || data.latest_price===undefined) { throw new Error(data.latest_price) } else { this.latest_price = data.latest_price; }
           this.isChangeZero = this.latest_price.d == 0;
           this.isChangePositive = this.latest_price.d >= 0;
           this.isMarketOpen = curr_time - this.latest_price.t*1000 <= 300000;
-          this.peers_list = ('Error' in data.peers_list || data.peers_list===null || data.peers_list===undefined) ? new Error(data.peers_list) : [...new Set(data.peers_list)].filter((element: any) => !(element as string).includes("."));
-          this.historical_data_for_charts = ('Error' in data.historical_data_for_charts || data.historical_data_for_charts===null || data.historical_data_for_charts===undefined) ? new Error(data.historical_data_for_charts) : data.historical_data_for_charts.results;
-          this.hourly_price_data = ('Error' in data.hourly_price_data || data.hourly_price_data===null || data.hourly_price_data===undefined) ? new Error(data.hourly_price_data) : data.hourly_price_data;
-          this.company_top_news = ('Error' in data.company_top_news || data.company_top_news===null || data.company_top_news===undefined) ? new Error(data.company_top_news) : data.company_top_news;
-          this.insider_sentiment = ('Error' in data.insider_sentiment || data.insider_sentiment===null || data.insider_sentiment===undefined) ? new Error(data.insider_sentiment) : data.insider_sentiment.data;
-          this.stock_recommendation_trends = ('Error' in data.stock_recommendation_trends || data.stock_recommendation_trends===null || data.stock_recommendation_trends===undefined) ? new Error(data.stock_recommendation_trends) : data.stock_recommendation_trends;
-          this.company_earnings_data = ('Error' in data.company_earnings_data || data.company_earnings_data===null || data.company_earnings_data===undefined) ? new Error(data.company_earnings_data) : data.company_earnings_data;
+          if ('Error' in data.peers_list || data.peers_list===null || data.peers_list===undefined) { throw new Error(data.peers_list) } else { this.peers_list = [...new Set(data.peers_list)].filter((element: any) => !(element as string).includes(".")); }
+          if ('Error' in data.historical_data_for_charts || data.historical_data_for_charts===null || data.historical_data_for_charts===undefined) { throw new Error(data.historical_data_for_charts) } else { this.historical_data_for_charts = data.historical_data_for_charts.results; }
+          if ('Error' in data.hourly_price_data || data.hourly_price_data===null || data.hourly_price_data===undefined) { throw new Error(data.hourly_price_data) } else { this.hourly_price_data = data.hourly_price_data; }
+          if ('Error' in data.company_top_news || data.company_top_news===null || data.company_top_news===undefined) { throw new Error(data.company_top_news) } else { this.company_top_news = data.company_top_news; }
+          if ('Error' in data.insider_sentiment || data.insider_sentiment===null || data.insider_sentiment===undefined) { throw new Error(data.insider_sentiment) } else { this.insider_sentiment = data.insider_sentiment.data; }
+          if ('Error' in data.stock_recommendation_trends || data.stock_recommendation_trends===null || data.stock_recommendation_trends===undefined) { throw new Error(data.stock_recommendation_trends) } else { this.stock_recommendation_trends = data.stock_recommendation_trends; }
+          if ('Error' in data.company_earnings_data || data.company_earnings_data===null || data.company_earnings_data===undefined) { throw new Error(data.company_earnings_data) } else { this.company_earnings_data = data.company_earnings_data; }
           this.default_stock_info_component = {
             stock_ticker: this.company_info.ticker
           , stock_company: this.company_info.name
           , quantity : 0
           , total_cost: 0.0
           }
-          this.stock_info_in_portfolio = data.stock_info_in_portfolio.portfolio_data === null ? this.default_stock_info_component : ('Error' in data.stock_info_in_portfolio.portfolio_data ? new Error(data.stock_info_in_portfolio.portfolio_data) : data.stock_info_in_portfolio.portfolio_data);
-          this.wallet_account = data.stock_info_in_portfolio.wallet_account === null ? 0 : ('Error' in data.stock_info_in_portfolio.wallet_account ? new Error(data.stock_info_in_portfolio.wallet_account) : data.stock_info_in_portfolio.wallet_account);
+          if (data.stock_info_in_portfolio.portfolio_data === null) { this.stock_info_in_portfolio = this.default_stock_info_component; } else if ('Error' in data.stock_info_in_portfolio.portfolio_data) { throw new Error(data.stock_info_in_portfolio.portfolio_data); } else { this.stock_info_in_portfolio = data.stock_info_in_portfolio.portfolio_data; }
+          if (data.stock_info_in_portfolio.wallet_account === null) { this.wallet_account = { amount : 0 }; } else if ('Error' in data.stock_info_in_portfolio.wallet_account) { throw new Error(data.stock_info_in_portfolio.wallet_account); } else { this.wallet_account = data.stock_info_in_portfolio.wallet_account; }
           this.enableSellButton = this.stock_info_in_portfolio.quantity > 0;
           this.portfolio_element_object = {
             stock_ticker: this.stock_info_in_portfolio.stock_ticker
@@ -173,7 +173,7 @@ export class StockInfoComponent implements OnInit{
           .subscribe({
             next: (data_watchlist: any) => {
               if (data_watchlist) {
-                this.isInWatchList = Object.keys(data_watchlist).includes('Error') ? new Error(data_watchlist) : Object.keys(data_watchlist).includes('stock_ticker');
+                if (Object.keys(data_watchlist).includes('Error')) { throw new Error(data_watchlist) } else { this.isInWatchList = Object.keys(data_watchlist).includes('stock_ticker'); }
               }
               var new_state_data = {
                 stock_ticker: this.stock_ticker
@@ -335,7 +335,6 @@ export class StockInfoComponent implements OnInit{
 
   openModal(option: string) {
     var stateData =  this.service.getStateData();
-    console.log(stateData);
     this.modalRef = this.modalService.open(StockTradeModalComponent, {
       data:
         { stock_display_symbol: this.company_info.ticker
@@ -343,7 +342,7 @@ export class StockInfoComponent implements OnInit{
         , current_price: this.latest_price.c
         , bought_stock_quantity: this.portfolio_element_object?.quantity
         , buy_option_selected: option === 'buy'
-        , portfolio_element_object: this.portfolio_element_object
+        , portfolio_element_object: (this.portfolio_element_object !== undefined) ? this.portfolio_element_object : this.default_stock_info_component
         }
     });
     this.modalRef.component.modalClosed.subscribe(() => {
